@@ -1,24 +1,9 @@
 import Link from "next/link";
-
-const featuredPosts = [
-  {
-    title: "博客系统架构思路",
-    description: "从静态优先、缓存优先到服务拆分，规划一个可平滑扩展的个人博客。",
-    tag: "Architecture"
-  },
-  {
-    title: "高并发下的页面渲染策略",
-    description: "哪些页面该静态化，哪些接口需要异步化，如何避免把数据库暴露在流量正前方。",
-    tag: "Performance"
-  },
-  {
-    title: "写作工作流与内容组织",
-    description: "用 MDX 和 Git 管理文章，兼顾写作效率、版本控制和发布质量。",
-    tag: "Content"
-  }
-];
+import { getAllPostsMeta } from "@/lib/posts";
 
 export default function HomePage() {
+  const featuredPosts = getAllPostsMeta().slice(0, 3);
+
   return (
     <main className="min-h-screen bg-sand text-ink">
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 py-16 md:px-10 lg:py-24">
@@ -50,12 +35,13 @@ export default function HomePage() {
 
         <section className="grid gap-5 md:grid-cols-3">
           {featuredPosts.map((post) => (
-            <article
+            <Link
               key={post.title}
+              href={`/blog/${post.slug}`}
               className="rounded-[1.75rem] border border-black/10 bg-white px-6 py-7 shadow-[0_12px_40px_rgba(0,0,0,0.06)]"
             >
               <p className="text-xs uppercase tracking-[0.2em] text-pine">
-                {post.tag}
+                {post.tags[0] ?? "Article"}
               </p>
               <h2 className="mt-4 text-2xl font-semibold leading-snug">
                 {post.title}
@@ -63,7 +49,7 @@ export default function HomePage() {
               <p className="mt-4 text-sm leading-7 text-black/72">
                 {post.description}
               </p>
-            </article>
+            </Link>
           ))}
         </section>
 
