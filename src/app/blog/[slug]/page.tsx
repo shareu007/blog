@@ -1,7 +1,8 @@
 import type { Metadata, Route } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllPostsMeta, getPostBySlug, renderPostContent } from "@/lib/posts";
+import { getAllPostsMeta, getPostBySlug } from "@/lib/posts";
+import { RenderMdx } from "@/lib/mdx";
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -41,8 +42,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const blocks = renderPostContent(post.content);
-
   return (
     <main className="min-h-screen bg-sand px-6 py-16 text-ink md:px-10 lg:py-24">
       <article className="mx-auto flex w-full max-w-3xl flex-col gap-8 rounded-[2rem] border border-black/10 bg-white px-6 py-10 shadow-[0_18px_50px_rgba(0,0,0,0.08)] md:px-10">
@@ -67,16 +66,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </header>
 
-        <section className="space-y-6 text-lg leading-9 text-black/80">
-          {blocks.map((block) =>
-            block.startsWith("# ") ? (
-              <h2 key={block} className="text-3xl font-semibold leading-tight">
-                {block.replace(/^# /, "")}
-              </h2>
-            ) : (
-              <p key={block}>{block}</p>
-            )
-          )}
+        <section className="space-y-6">
+          <RenderMdx source={post.content} />
         </section>
       </article>
     </main>

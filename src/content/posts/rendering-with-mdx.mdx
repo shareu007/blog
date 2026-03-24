@@ -1,0 +1,33 @@
+---
+title: "Rendering With MDX"
+description: "Use MDX to keep writing flexible while still shipping static blog pages."
+publishedAt: "2026-03-25"
+tags:
+  - mdx
+  - rendering
+---
+
+# Rendering With MDX
+
+MDX lets the blog keep the convenience of Markdown while still allowing richer UI later.
+
+## Why it matters
+
+1. Content stays easy to write.
+2. Pages can still be statically generated.
+3. The rendering layer can evolve without changing the authoring format.
+
+## Example
+
+```tsx
+export function Callout({ title, children }) {
+  return (
+    <section>
+      <strong>{title}</strong>
+      <div>{children}</div>
+    </section>
+  );
+}
+```
+
+> This is the right time to introduce MDX, before the content model grows more complex.

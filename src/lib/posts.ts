@@ -1,7 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-
-type FrontmatterValue = string | string[];
+import matter from "gray-matter";
 
 export type PostMeta = {
   slug: string;
@@ -17,67 +16,9 @@ export type Post = PostMeta & {
 
 const postsDirectory = path.join(process.cwd(), "src/content/posts");
 
-function parseFrontmatter(source: string): {
-  data: Record<string, FrontmatterValue>;
-  content: string;
-} {
-  const lines = source.replace(/\r\n/g, "\n").split("\n");
-
-  if (lines[0] !== "---") {
-    return { data: {}, content: source.trim() };
-  }
-
-  const data: Record<string, FrontmatterValue> = {};
-  let index = 1;
-
-  while (index < lines.length) {
-    const line = lines[index];
-
-    if (line === "---") {
-      index += 1;
-      break;
-    }
-
-    if (line.startsWith("  - ")) {
-      index += 1;
-      continue;
-    }
-
-    const separatorIndex = line.indexOf(":");
-    if (separatorIndex === -1) {
-      index += 1;
-      continue;
-    }
-
-    const key = line.slice(0, separatorIndex).trim();
-    const rawValue = line.slice(separatorIndex + 1).trim();
-
-    if (rawValue.length > 0) {
-      data[key] = rawValue.replace(/^"(.*)"$/, "$1");
-      index += 1;
-      continue;
-    }
-
-    const items: string[] = [];
-    index += 1;
-
-    while (index < lines.length && lines[index].startsWith("  - ")) {
-      items.push(lines[index].replace("  - ", "").trim());
-      index += 1;
-    }
-
-    data[key] = items;
-  }
-
-  return {
-    data,
-    content: lines.slice(index).join("\n").trim()
-  };
-}
-
 function normalizePost(
   slug: string,
-  data: Record<string, FrontmatterValue>,
+  data: Record<string, unknown>,
   content: string
 ): Post {
   return {
@@ -102,7 +43,7 @@ export function getAllPostsMeta(): PostMeta[] {
     .map((fileName) => {
       const slug = fileName.replace(/\.mdx$/, "");
       const source = fs.readFileSync(path.join(postsDirectory, fileName), "utf8");
-      const { data, content } = parseFrontmatter(source);
+      const { data, content } = matter(source);
       return normalizePost(slug, data, content);
     })
     .sort((left, right) => right.publishedAt.localeCompare(left.publishedAt))
@@ -117,16 +58,9 @@ export function getPostBySlug(slug: string): Post | null {
   }
 
   const source = fs.readFileSync(filePath, "utf8");
-  const { data, content } = parseFrontmatter(source);
+  const { data, content } = matter(source);
 
   return normalizePost(slug, data, content);
-}
-
-export function renderPostContent(content: string): string[] {
-  return content
-    .split("\n\n")
-    .map((block) => block.trim())
-    .filter(Boolean);
 }
 
 export function getAllTags(): string[] {
