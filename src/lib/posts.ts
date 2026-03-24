@@ -128,3 +128,13 @@ export function renderPostContent(content: string): string[] {
     .map((block) => block.trim())
     .filter(Boolean);
 }
+
+export function getAllTags(): string[] {
+  return Array.from(
+    new Set(getAllPostsMeta().flatMap((post) => post.tags))
+  ).sort((left, right) => left.localeCompare(right));
+}
+
+export function getPostsByTag(tag: string): PostMeta[] {
+  return getAllPostsMeta().filter((post) => post.tags.includes(tag));
+}

@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Route } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllPostsMeta, getPostBySlug, renderPostContent } from "@/lib/posts";
 
@@ -55,12 +56,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <p className="text-lg leading-8 text-black/70">{post.description}</p>
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
-              <span
+              <Link
                 key={tag}
+                href={`/tags/${tag}` as Route}
                 className="rounded-full bg-sand px-3 py-1 text-xs uppercase tracking-[0.18em] text-pine"
               >
                 {tag}
-              </span>
+              </Link>
             ))}
           </div>
         </header>
