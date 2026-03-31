@@ -1,0 +1,34 @@
+<svg width="1600" height="840" viewBox="0 0 1600 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="840" rx="40" fill="#F4EFE6"/>
+  <rect x="56" y="56" width="1488" height="728" rx="32" fill="url(#paint0_linear)"/>
+  <circle cx="1298" cy="177" r="120" fill="#D96C3D" fill-opacity="0.22"/>
+  <circle cx="1377" cy="640" r="154" fill="#184D47" fill-opacity="0.16"/>
+  <circle cx="282" cy="170" r="90" fill="#184D47" fill-opacity="0.14"/>
+  <rect x="120" y="124" width="218" height="44" rx="22" fill="#184D47" fill-opacity="0.12"/>
+  <text x="154" y="153" fill="#184D47" font-family="Georgia, serif" font-size="20" letter-spacing="4">SHAREU BLOG</text>
+  <text x="120" y="294" fill="#111111" font-family="Georgia, serif" font-size="88" font-weight="700">
+    <tspan x="120" dy="0">Build A Fast,</tspan>
+    <tspan x="120" dy="108">Calm Writing Space.</tspan>
+  </text>
+  <text x="126" y="498" fill="#111111" fill-opacity="0.72" font-family="Georgia, serif" font-size="32">
+    <tspan x="126" dy="0">A personal blog system powered by Next.js, TypeScript and MDX.</tspan>
+    <tspan x="126" dy="48">Static-first pages, clean reading experience, room for future scale.</tspan>
+  </text>
+  <rect x="120" y="592" width="270" height="72" rx="36" fill="#111111"/>
+  <text x="168" y="637" fill="#F4EFE6" font-family="Georgia, serif" font-size="28">Read. Write. Ship.</text>
+  <rect x="940" y="202" width="430" height="390" rx="28" fill="white" fill-opacity="0.8"/>
+  <rect x="978" y="246" width="110" height="28" rx="14" fill="#D96C3D" fill-opacity="0.18"/>
+  <rect x="978" y="302" width="260" height="26" rx="13" fill="#111111"/>
+  <rect x="978" y="348" width="318" height="18" rx="9" fill="#111111" fill-opacity="0.18"/>
+  <rect x="978" y="382" width="280" height="18" rx="9" fill="#111111" fill-opacity="0.18"/>
+  <rect x="978" y="448" width="160" height="20" rx="10" fill="#184D47" fill-opacity="0.18"/>
+  <rect x="978" y="490" width="320" height="18" rx="9" fill="#111111" fill-opacity="0.12"/>
+  <rect x="978" y="522" width="294" height="18" rx="9" fill="#111111" fill-opacity="0.12"/>
+  <rect x="978" y="554" width="242" height="18" rx="9" fill="#111111" fill-opacity="0.12"/>
+  <defs>
+    <linearGradient id="paint0_linear" x1="118" y1="110" x2="1472" y2="758" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F2"/>
+      <stop offset="1" stop-color="#F2E9DB"/>
+    </linearGradient>
+  </defs>
+</svg>
